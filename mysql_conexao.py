@@ -16,7 +16,6 @@ def create_db_connection(host_name, user_name, user_password, db_name):
         print(f"❌ Erro na conexão com o banco de dados: {err}")
     return connection
 
-# Descobrir se o usuário logado é um administrador
 def descobrir_tipo_usuario(conn, login):
     try:
         cursor = conn.cursor()
@@ -35,7 +34,6 @@ def descobrir_tipo_usuario(conn, login):
         print(f"Erro ao verificar tipo de usuário: {err}")
         return None
 
-# Menu para administrador
 def menu_administrador(conn):
     while True:
         print("\n📁 Menu do Administrador")
@@ -55,7 +53,6 @@ def menu_administrador(conn):
         else:
             print("❌ Opção inválida.")
 
-# Menu para usuário comum
 def menu_usuario(conn, login):
     while True:
         print("\n📂 Menu do Usuário")
@@ -75,21 +72,18 @@ def menu_usuario(conn, login):
         else:
             print("❌ Opção inválida.")
 
-# Listar todos os usuários (admin)
 def listar_usuarios(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT id_user, login, email, data_ingresso FROM usuario")
     for row in cursor.fetchall():
         print(row)
 
-# Listar todos os arquivos (admin)
 def listar_arquivos(conn):
     cursor = conn.cursor()
     cursor.execute("SELECT id_arq, nome, tipo, perm_acesso, tam_bytes FROM arquivo")
     for row in cursor.fetchall():
         print(row)
 
-# Listar arquivos do usuário logado
 def listar_arquivos_usuario(conn, login):
     cursor = conn.cursor()
     cursor.execute("SELECT id_user FROM usuario WHERE login = %s", (login,))
@@ -114,7 +108,6 @@ def listar_arquivos_usuario(conn, login):
         for arq in arquivos:
             print(arq)
 
-# Listar arquivos compartilhados com o usuário
 def listar_compartilhamentos_usuario(conn, login):
     cursor = conn.cursor()
     cursor.execute("SELECT id_user FROM usuario WHERE login = %s", (login,))
@@ -142,7 +135,6 @@ def listar_compartilhamentos_usuario(conn, login):
 def main():
     print("🔐 Bem-vindo ao sistema de arquivos")
 
-    # Conecta com o MySQL já usando root e sua senha fixa
     conn = create_db_connection("localhost", "root", "My#Sql8427@", "webdriver")
     if conn is None:
         print("❌ Não foi possível conectar ao banco de dados.")
