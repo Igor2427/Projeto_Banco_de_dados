@@ -2,14 +2,14 @@ import mysql.connector
 from getpass import getpass
 from mysql.connector import Error
 
-def criar_conexao(h_name, u_name, u_password, cc_name):
+def create_db_connection(host_name, user_name, user_password, db_name):
     connection = None
     try:
         connection = mysql.connector.connect(
-            host=h_name,
-            user=u_name,
-            passwd=u_password,
-            database=cc_name
+            host=host_name,
+            user=user_name,
+            passwd=user_password,
+            database=db_name
         )
         print("✅ Conexão com o banco de dados realizada com sucesso")
     except Error as err:
