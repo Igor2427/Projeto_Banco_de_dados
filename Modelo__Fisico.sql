@@ -288,40 +288,6 @@ END //
 
 DELIMITER ;
 
-
--- ROLES E USUÁRIOS
-
--- Remover roles se já existirem
-DROP ROLE IF EXISTS PapelUsuario;
-DROP ROLE IF EXISTS PapelEmpresa;
-DROP ROLE IF EXISTS PapelAdm;
-
--- Criar roles
-CREATE ROLE PapelUsuario;
-CREATE ROLE PapelEmpresa;
-CREATE ROLE PapelAdm;
-
--- Conceder permissões aos roles
-GRANT SELECT, INSERT, UPDATE ON webdriver.arquivo TO PapelUsuario;
-GRANT SELECT ON webdriver.usuario TO PapelEmpresa;
-GRANT SELECT ON webdriver.arquivo TO PapelEmpresa;
-GRANT ALL PRIVILEGES ON webdriver.* TO PapelAdm;
-
--- Remover usuários se já existirem
-DROP USER IF EXISTS 'Luquinhas14'@'localhost';
-DROP USER IF EXISTS 'Amorinha'@'localhost';
-DROP USER IF EXISTS 'Letty'@'localhost';
-
--- Criar usuários
-CREATE USER 'Luquinhas14'@'localhost' IDENTIFIED BY 'ben10';
-CREATE USER 'Amorinha'@'localhost' IDENTIFIED BY 'amora';
-CREATE USER 'Letty'@'localhost' IDENTIFIED BY 'let123';
-
--- Atribuir roles aos usuários
-GRANT PapelUsuario TO 'Luquinhas14'@'localhost';
-GRANT PapelUsuario TO 'Amorinha'@'localhost';
-GRANT PapelAdm TO 'Letty'@'localhost';
-
 -- VIEWS
 DROP VIEW IF EXISTS VisaoUsuario;
 
