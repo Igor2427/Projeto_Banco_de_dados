@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS webdriver;
 USE webdriver;
 
--- Apagar tabelas na ordem correta para evitar conflito de FK
 DROP TABLE IF EXISTS atividades_recentes;
 DROP TABLE IF EXISTS compartilhamento;
 DROP TABLE IF EXISTS comenta;
@@ -28,7 +27,7 @@ DROP PROCEDURE IF EXISTS Chavear;
 DROP PROCEDURE IF EXISTS Remover_acessos;
 
 
--- TABELAS PRINCIPAIS
+
 CREATE TABLE plano(
 	id_plano INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(20),
@@ -141,9 +140,6 @@ CREATE TABLE atividades_recentes(
     acesso VARCHAR(20) CHECK (acesso='Prioritário' OR acesso='Não Prioritário'),
     FOREIGN KEY(id_arquivo) REFERENCES arquivo(id_arq)
 );
-
--- O resto do seu script segue aqui (procedures, triggers, etc)
-
 
 -- PROCEDURES
 DELIMITER //
